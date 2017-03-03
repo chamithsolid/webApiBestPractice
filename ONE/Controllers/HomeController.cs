@@ -8,9 +8,9 @@ namespace ONE.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public void Index()
         {
-            return null;
+           Response.Redirect("http://localhost:49036/Pages/default.html");
         }
     }
 }

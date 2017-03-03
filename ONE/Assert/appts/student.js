@@ -1,3 +1,4 @@
+/// <reference path="../../scripts/typings/others/kendo.all.d.ts" />
 var One;
 (function (One) {
     var Student;
@@ -326,7 +327,28 @@ var One;
             }
             // sortable
             function getOrderdList() {
-                //getOrderdList
+                try {
+                    apiCalls.getOrderdList_().done(function (e) {
+                        var template = kendo.template($("#template-entitySortable").html());
+                        var result = template(e); //Execute the template
+                        $("#lst-order-student").html(result); //Append the result
+                        $("#sortable-basic").kendoSortable({
+                            hint: function (element) {
+                                return element.clone().addClass("hint");
+                            },
+                            placeholder: function (element) {
+                                return element.clone().addClass("placeholder").text("drop here");
+                            },
+                            cursorOffset: {
+                                top: -10,
+                                left: -230
+                            }
+                        });
+                    });
+                }
+                catch (e) {
+                    throw e;
+                }
             }
             function viewOrderList(e) {
                 if (e === 'show') {
@@ -402,18 +424,6 @@ var One;
                             $d.val('Show Order List');
                         }
                     });
-                    $("#sortable-basic").kendoSortable({
-                        hint: function (element) {
-                            return element.clone().addClass("hint");
-                        },
-                        placeholder: function (element) {
-                            return element.clone().addClass("placeholder").text("drop here");
-                        },
-                        cursorOffset: {
-                            top: -10,
-                            left: -230
-                        }
-                    });
                     validation();
                 }
                 catch (err) {
@@ -426,6 +436,7 @@ var One;
                     try {
                         initControllers();
                         lookup();
+                        getOrderdList();
                     }
                     catch (err) {
                         Util.Errors.logException(err, "student");

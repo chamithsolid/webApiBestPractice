@@ -1,4 +1,6 @@
-﻿module One.Student {
+﻿/// <reference path="../../scripts/typings/others/kendo.all.d.ts" />
+
+module One.Student {
     var student = (function () {
         //globle variables
         var pageSize = 0;
@@ -284,8 +286,28 @@
 
         // sortable
         function getOrderdList() {
-
-            //getOrderdList
+            try {
+                apiCalls.getOrderdList_().done((e) => {
+                    var template = kendo.template($("#template-entitySortable").html());
+                    var result = template(e); //Execute the template
+                    $("#lst-order-student").html(result); //Append the result
+                    $("#sortable-basic").kendoSortable({
+                        hint: function (element) {
+                            return element.clone().addClass("hint");
+                        },
+                        placeholder: function (element) {
+                            return element.clone().addClass("placeholder").text("drop here");
+                        },
+                        cursorOffset: {
+                            top: -10,
+                            left: -230
+                        }
+                    });
+                });    
+            } catch (e) {
+                throw e;
+            } 
+          
         }
         function viewOrderList(e) {
             if (e === 'show') {
@@ -362,19 +384,6 @@
                         $d.val('Show Order List');
                     }
                 });
-
-                $("#sortable-basic").kendoSortable({
-                    hint: function (element) {
-                        return element.clone().addClass("hint");
-                    },
-                    placeholder: function (element) {
-                        return element.clone().addClass("placeholder").text("drop here");
-                    },
-                    cursorOffset: {
-                        top: -10,
-                        left: -230
-                    }
-                });
                 validation();
             } catch (err) { throw err; }
         }
@@ -384,6 +393,7 @@
                 try {
                     initControllers();
                     lookup();
+                    getOrderdList();
                 } catch (err) {
                     Util.Errors.logException(err, "student");
                 }

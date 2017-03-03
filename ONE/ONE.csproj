@@ -388,9 +388,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\UI\Index.cshtml" />
-    <Content Include="Views\UI\_Student.cshtml" />
-    <Content Include="Views\UI\Login.cshtml" />
     <Content Include="Scripts\typings\others\CustomFieldsHelpers.js.map" />
     <Content Include="Scripts\typings\others\helpers_ts.js.map" />
     <Content Include="Scripts\typings\others\postredirect.js.map" />
@@ -429,6 +426,8 @@
     <TypeScriptCompile Include="Assert\appts\app.ts" />
     <TypeScriptCompile Include="Assert\appts\authontication.ts" />
     <TypeScriptCompile Include="Assert\appts\bean.ts" />
+    <TypeScriptCompile Include="Assert\appts\router.ts" />
+    <TypeScriptCompile Include="Assert\appts\student.ts" />
     <TypeScriptCompile Include="Assert\appts\util\enums.ts" />
     <TypeScriptCompile Include="Assert\appts\util\errors.ts" />
     <TypeScriptCompile Include="Assert\appts\util\tools.ts" />
